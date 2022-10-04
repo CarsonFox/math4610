@@ -8,7 +8,7 @@ int main(void) {
     return x * exp(-x);
   }
 
-  printf("%f\n", newton(f, 1/2, 10000, 1e-6));
+  printf("%f\n", hybrid_bn(f, -1, 2, 1e-3, 100, 1e-9));
 
   return 0;
 }
