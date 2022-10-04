@@ -1,13 +1,14 @@
-#include "stdio.h"
+#include <stdio.h>
+#include <math.h>
 
 #include "rootfinding.h"
 
 int main(void) {
   double f(double x) {
-    return x - 4;
+    return x * exp(-x);
   }
 
-  printf("%f\n", newton(f, 2, 100, 1e-6));
+  printf("%f\n", bisect(f, -3, 2, 1e-6));
 
   return 0;
 }
