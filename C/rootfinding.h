@@ -9,4 +9,7 @@ double secant(double (*f)(double), double a, double b, int max, double tol);
 double hybrid_bn(double (*f)(double), double a, double b,
     double threshold, int max, double tol);
 
+double hybrid_bs(double (*f)(double), double a, double b,
+    double threshold, int max, double tol);
+
 #endif /* include guard */
