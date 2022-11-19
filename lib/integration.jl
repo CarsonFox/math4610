@@ -1,5 +1,7 @@
 module Integration
 
+export simpson
+
 function simpson(f, a, b, h)
     domain = a:h:b
     
