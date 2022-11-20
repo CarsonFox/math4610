@@ -6,5 +6,7 @@ set(CMAKE_C_FLAGS "-Wall -Wextra -Werror -O2")
 
 include_directories(include)
 
-add_library(linalg SHARED src/library.c)
-add_executable(test test/test.c test/munit/munit.c)
+set(sources src/vector.c)
+
+add_library(linalg SHARED ${sources})
+add_executable(test test/test.c test/munit/munit.c ${sources})
