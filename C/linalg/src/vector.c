@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <assert.h>
+#include <math.h>
 
 #include "../include/vector.h"
 
@@ -90,4 +91,50 @@ vector vec_mul(vector u, double c) {
     }
 
     return x;
+}
+
+vector vec_zeros(int length) {
+    vector zeros = {
+            .length = length,
+            .data = calloc(length, sizeof(double))
+    };
+    return zeros;
+}
+
+vector vec_ones(int length) {
+    vector ones = {
+            .length = length,
+            .data = calloc(length, sizeof(double))
+    };
+
+    for (int i = 0; i < length; i++) {
+        ones.data[i] = 1.0;
+    }
+
+    return ones;
+}
+
+double vec_norm(vector x, int order) {
+    double sum = 0;
+    double p = (double) order;
+
+    for (int i = 0; i < x.length; i++) {
+        sum += pow(x.data[i], p);
+    }
+
+    return pow(sum, 1/p);
+}
+
+double vec_max(vector x) {
+    assert(x.length > 0);
+
+    double max = x.data[0];
+
+    for (int i = 1; i < x.length; i++) {
+        if (x.data[i] > max) {
+            max = x.data[i];
+        }
+    }
+
+    return max;
 }

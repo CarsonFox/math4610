@@ -7,11 +7,17 @@ typedef struct vector {
 } vector;
 
 vector new_vec(int length, ...);
+vector vec_zeros(int length);
+vector vec_ones(int length);
+
 void print_vec(vector x);
 
 vector vec_add(vector u, vector v);
 vector vec_sub(vector u, vector v);
 double vec_dot(vector u, vector v);
 vector vec_mul(vector u, double c);
+
+double vec_norm(vector x, int order);
+double vec_max(vector x);
 
 #endif
