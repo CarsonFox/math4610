@@ -23,6 +23,27 @@ vector new_vec(int length, ...) {
     return x;
 }
 
+vector vec_zeros(int length) {
+    vector zeros = {
+            .length = length,
+            .data = calloc(length, sizeof(double))
+    };
+    return zeros;
+}
+
+vector vec_ones(int length) {
+    vector ones = {
+            .length = length,
+            .data = calloc(length, sizeof(double))
+    };
+
+    for (int i = 0; i < length; i++) {
+        ones.data[i] = 1.0;
+    }
+
+    return ones;
+}
+
 void print_vec(vector x) {
     printf("[");
     for (int i = 0; i < x.length; i++) {
@@ -91,27 +112,6 @@ vector vec_mul(vector u, double c) {
     }
 
     return x;
-}
-
-vector vec_zeros(int length) {
-    vector zeros = {
-            .length = length,
-            .data = calloc(length, sizeof(double))
-    };
-    return zeros;
-}
-
-vector vec_ones(int length) {
-    vector ones = {
-            .length = length,
-            .data = calloc(length, sizeof(double))
-    };
-
-    for (int i = 0; i < length; i++) {
-        ones.data[i] = 1.0;
-    }
-
-    return ones;
 }
 
 double vec_norm(vector x, int order) {
