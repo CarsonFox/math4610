@@ -138,3 +138,20 @@ double vec_max(vector x) {
 
     return max;
 }
+
+vector vec_cross(vector u, vector v) {
+    assert(u.length == 3);
+    check_vector_sizes(u, v);
+
+    double x1 = u.data[1]*v.data[2] - u.data[2]*v.data[1];
+    double x2 = u.data[2]*v.data[0] - u.data[0]*v.data[2];
+    double x3 = u.data[0]*v.data[1] - u.data[1]*v.data[0];
+
+    return new_vec(3, x1, x2, x3);
+}
+
+void free_vec(vector u) {
+    free(u.data);
+    u.length = 0;
+    u.data = NULL;
+}

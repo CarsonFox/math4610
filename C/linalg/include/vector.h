@@ -16,8 +16,11 @@ vector vec_add(vector u, vector v);
 vector vec_sub(vector u, vector v);
 double vec_dot(vector u, vector v);
 vector vec_mul(vector u, double c);
+vector vec_cross(vector u, vector v);
 
 double vec_norm(vector x, int order);
 double vec_max(vector x);
+
+void free_vec(vector u);
 
 #endif
