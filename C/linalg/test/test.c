@@ -82,7 +82,12 @@ int main(void) {
                               4.0, 6.0, 7.0);
         print_mat(A);
 
+        printf("\n");
+        matrix B = mat_add(A, A);
+        print_mat(B);
+
         free_mat(A);
+        free_mat(B);
     }
 
     return 0;

@@ -13,6 +13,8 @@ void free_mat(matrix A);
 
 void print_mat(matrix A);
 
+double mat_at(matrix A, int i, int j);
+
 matrix mat_add(matrix A, matrix B);
 matrix mat_sub(matrix A, matrix B);
 matrix mat_mul(matrix A, matrix B);
