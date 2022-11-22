@@ -2,6 +2,7 @@
 
 #include "munit/munit.h"
 #include "vector.h"
+#include "matrix.h"
 
 void test_add(vector x, vector y) {
     vector result = vec_add(x, y);
@@ -49,7 +50,6 @@ void test_mul(vector x, double c) {
 
 void test_cross_dot(vector x, vector y) {
     vector c = vec_cross(x, y);
-    print_vec(c);
 
     munit_assert_double_equal(vec_dot(x, c), 0, 6);
     munit_assert_double_equal(vec_dot(y, c), 0, 6);
@@ -58,20 +58,32 @@ void test_cross_dot(vector x, vector y) {
 }
 
 int main(void) {
-    vector x = new_vec(3, 3.0, -4.0, 2.0);
-    vector y = new_vec(3, 9.0, 1.0, -7.0);
+    {
+        vector x = new_vec(3, 3.0, -4.0, 2.0);
+        vector y = new_vec(3, 9.0, 1.0, -7.0);
 
-    test_add(x, y);
-    test_sub(x, y);
-    test_mul(x, munit_rand_double());
-    test_cross_dot(x, y);
+        test_add(x, y);
+        test_sub(x, y);
+        test_mul(x, munit_rand_double());
+        test_cross_dot(x, y);
 
-    printf("x = ");
-    print_vec(x);
-    printf("y = ");
-    print_vec(y);
+        printf("x = ");
+        print_vec(x);
+        printf("y = ");
+        print_vec(y);
 
-    free_vec(x);
-    free_vec(y);
+        free_vec(x);
+        free_vec(y);
+    }
+    {
+        matrix A = new_matrix(3, 3,
+                              3.0, 2.0, 8.0,
+                              1.0, -5.0, 9.0,
+                              4.0, 6.0, 7.0);
+        print_mat(A);
+
+        free_mat(A);
+    }
+
     return 0;
 }
