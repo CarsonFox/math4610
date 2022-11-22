@@ -150,6 +150,13 @@ vector vec_cross(vector u, vector v) {
     return new_vec(3, x1, x2, x3);
 }
 
+double triple_prod(vector a, vector b, vector c) {
+    vector cross = vec_cross(b, c);
+    double prod = vec_dot(a, cross);
+    free_vec(cross);
+    return prod;
+}
+
 void free_vec(vector u) {
     free(u.data);
     u.length = 0;
