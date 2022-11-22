@@ -47,7 +47,7 @@ vector vec_ones(int length) {
 void print_vec(vector x) {
     printf("[");
     for (int i = 0; i < x.length; i++) {
-        printf("%.2f", x.data[i]);
+        printf("%.1f", x.data[i]);
         if (i < x.length - 1) {
             printf(", ");
         }

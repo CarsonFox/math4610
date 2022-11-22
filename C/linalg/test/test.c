@@ -82,12 +82,24 @@ int main(void) {
                               4.0, 6.0, 7.0);
         print_mat(A);
 
-        printf("\n");
         matrix B = mat_add(A, A);
+        printf("\n");
         print_mat(B);
+
+        matrix C = mat_mul(A, A);
+        printf("\n");
+        print_mat(C);
+
+        vector x = new_vec(3, 3.0, -4.0, 2.0);
+        vector y = mat_act(A, x);
+        printf("\nAx = \n");
+        print_vec(y);
 
         free_mat(A);
         free_mat(B);
+        free_mat(C);
+        free_vec(x);
+        free_vec(y);
     }
 
     return 0;

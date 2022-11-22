@@ -9,9 +9,9 @@ typedef struct matrix {
 } matrix;
 
 matrix new_matrix(int m, int n, ...);
-void free_mat(matrix A);
+void free_mat(matrix mat);
 
-void print_mat(matrix A);
+void print_mat(matrix mat);
 
 double mat_at(matrix A, int i, int j);
 
