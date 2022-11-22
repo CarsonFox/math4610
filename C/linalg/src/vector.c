@@ -125,7 +125,7 @@ double vec_norm(vector x, int order) {
     return pow(sum, 1/p);
 }
 
-double vec_max(vector x) {
+double vec_max_norm(vector x) {
     assert(x.length > 0);
 
     double max = x.data[0];
