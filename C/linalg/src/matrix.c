@@ -121,9 +121,14 @@ matrix mat_sub(matrix A, matrix B) {
 double row_col_dot(matrix A, matrix B, int row, int col) {
     double sum = 0;
 
-    #pragma omp parallel
+    #pragma omp parallel for
     for (int i = 0; i < A.cols; i++) {
-        sum += mat_at(A, row, i) * mat_at(B, i, col);
+        double prod = mat_at(A, row, i) * mat_at(B, i, col);
+
+        #pragma omp critical
+        {
+            sum += prod;
+        }
     }
 
     return sum;
