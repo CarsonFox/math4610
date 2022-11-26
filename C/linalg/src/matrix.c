@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <assert.h>
 
+#include <omp.h>
+
 #include "matrix.h"
 
 matrix new_matrix(int m, int n, ...) {
@@ -119,6 +121,7 @@ matrix mat_sub(matrix A, matrix B) {
 double row_col_dot(matrix A, matrix B, int row, int col) {
     double sum = 0;
 
+    #pragma omp parallel
     for (int i = 0; i < A.cols; i++) {
         sum += mat_at(A, row, i) * mat_at(B, i, col);
     }
