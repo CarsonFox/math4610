@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+#include <omp.h>
+
 #include "munit/munit.h"
 #include "vector.h"
 #include "matrix.h"

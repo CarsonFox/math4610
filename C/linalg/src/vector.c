@@ -165,6 +165,7 @@ vector vec_hadamard(vector u, vector v) {
             .data = calloc(u.length, sizeof(double)),
     };
 
+    #pragma omp parallel for
     for (int i = 0; i < u.length; i++) {
         x.data[i] = u.data[i] * v.data[i];
     }

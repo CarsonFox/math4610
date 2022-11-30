@@ -1,10 +1,12 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <stdio.h>
 
 #include <omp.h>
 
 #include "matrix.h"
+#include "vector.h"
 
 matrix new_matrix(int m, int n, ...) {
     va_list argp;
@@ -168,6 +170,7 @@ matrix mat_hadamard(matrix A, matrix B) {
             .data = calloc(A.rows * A.cols, sizeof(double)),
     };
 
+    #pragma omp parallel for
     for (int i = 0; i < result.rows; i++) {
         for (int j = 0; j < result.rows; j++) {
             double sum = mat_at(A, i, j) * mat_at(B, i, j);
