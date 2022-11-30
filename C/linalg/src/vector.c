@@ -4,7 +4,8 @@
 #include <assert.h>
 #include <math.h>
 
-#include "../include/vector.h"
+#include "vector.h"
+#include "matrix.h"
 
 vector new_vec(int length, ...) {
     va_list argp;
@@ -171,6 +172,23 @@ vector vec_hadamard(vector u, vector v) {
     }
 
     return x;
+}
+
+matrix vec_outer_prod(vector u, vector v) {
+    matrix A = {
+            .rows = u.length,
+            .cols = v.length,
+            .data = calloc(u.length * v.length, sizeof(double)),
+    };
+
+    #pragma omp parallel for
+    for (int i = 0; i < A.rows; i++) {
+        for (int j = 0; j < A.cols; j++) {
+            mat_set(A, i, j, u.data[i] * v.data[j]);
+        }
+    }
+
+    return A;
 }
 
 void free_vec(vector u) {

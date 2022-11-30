@@ -3,8 +3,6 @@
 #include <assert.h>
 #include <stdio.h>
 
-#include <omp.h>
-
 #include "matrix.h"
 #include "vector.h"
 
