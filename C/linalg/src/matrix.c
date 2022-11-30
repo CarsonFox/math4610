@@ -158,3 +158,22 @@ vector mat_act(matrix A, vector x) {
     matrix result = mat_mul(A, B);
     return mat_as_vec(result);
 }
+
+matrix mat_hadamard(matrix A, matrix B) {
+    check_matrix_sizes(A, B);
+
+    matrix result = {
+            .rows = A.rows,
+            .cols = A.cols,
+            .data = calloc(A.rows * A.cols, sizeof(double)),
+    };
+
+    for (int i = 0; i < result.rows; i++) {
+        for (int j = 0; j < result.rows; j++) {
+            double sum = mat_at(A, i, j) * mat_at(B, i, j);
+            mat_set(result, i, j, sum);
+        }
+    }
+
+    return result;
+}

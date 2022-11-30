@@ -72,6 +72,26 @@ void test_vec_hadamard(vector x, vector y) {
     free_vec(result);
 }
 
+void test_mat_hadamard(matrix A, matrix B) {
+    matrix result = mat_hadamard(A, B);
+
+    munit_assert_int(result.rows, ==, A.rows);
+    munit_assert_int(result.cols, ==, A.cols);
+    munit_assert_int(result.rows, ==, B.rows);
+    munit_assert_int(result.cols, ==, B.cols);
+    munit_assert_not_null(result.data);
+
+    for (int i = 0; i < result.rows; i++) {
+        for (int j = 0; j < result.cols; j++) {
+            double a = mat_at(result, i, j);
+            double b = mat_at(A, i, j) * mat_at(B, i, j);
+            munit_assert_double_equal(a, b, 6);
+        }
+    }
+
+    free_mat(result);
+}
+
 int main(void) {
     {
         vector x = new_vec(3, 3.0, -4.0, 2.0);
@@ -101,6 +121,8 @@ int main(void) {
         matrix B = mat_add(A, A);
         printf("\n");
         print_mat(B);
+
+        test_mat_hadamard(A, B);
 
         matrix C = mat_mul(A, A);
         printf("\n");

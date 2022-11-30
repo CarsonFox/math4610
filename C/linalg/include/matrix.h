@@ -19,5 +19,6 @@ matrix mat_add(matrix A, matrix B);
 matrix mat_sub(matrix A, matrix B);
 matrix mat_mul(matrix A, matrix B);
 vector mat_act(matrix A, vector x);
+matrix mat_hadamard(matrix A, matrix B);
 
 #endif
