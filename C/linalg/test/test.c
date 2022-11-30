@@ -57,6 +57,21 @@ void test_cross_dot(vector x, vector y) {
     free_vec(c);
 }
 
+void test_vec_hadamard(vector x, vector y) {
+    vector result = vec_hadamard(x, y);
+
+    munit_assert_int(result.length, ==, x.length);
+    munit_assert_int(result.length, ==, y.length);
+    munit_assert_not_null(result.data);
+
+    for (int i = 0; i < result.length; i++) {
+        double a = result.data[i], b = x.data[i] * y.data[i];
+        munit_assert_double_equal(a, b, 6);
+    }
+
+    free_vec(result);
+}
+
 int main(void) {
     {
         vector x = new_vec(3, 3.0, -4.0, 2.0);
@@ -66,6 +81,7 @@ int main(void) {
         test_sub(x, y);
         test_mul(x, munit_rand_double());
         test_cross_dot(x, y);
+        test_vec_hadamard(x, y);
 
         printf("x = ");
         print_vec(x);

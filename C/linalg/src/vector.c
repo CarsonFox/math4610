@@ -157,6 +157,21 @@ double triple_prod(vector a, vector b, vector c) {
     return prod;
 }
 
+vector vec_hadamard(vector u, vector v) {
+    check_vector_sizes(u, v);
+
+    vector x = {
+            .length = u.length,
+            .data = calloc(u.length, sizeof(double)),
+    };
+
+    for (int i = 0; i < u.length; i++) {
+        x.data[i] = u.data[i] * v.data[i];
+    }
+
+    return x;
+}
+
 void free_vec(vector u) {
     free(u.data);
     u.length = 0;

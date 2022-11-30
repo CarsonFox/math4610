@@ -19,6 +19,7 @@ double vec_dot(vector u, vector v);
 vector vec_mul(vector u, double c);
 vector vec_cross(vector u, vector v);
 double triple_prod(vector a, vector b, vector c);
+vector vec_hadamard(vector u, vector v);
 
 double vec_norm(vector x, int order);
 double vec_max_norm(vector x);
