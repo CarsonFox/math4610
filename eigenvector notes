@@ -1,0 +1,5 @@
+1. power iteration -> largest eigenvector
+2. inverse iteration -> smallest
+3. regular partition [largest, smallest]
+  B^-1 = (A - lambda n * I)^-1
+inverting matrix: jacobi iteration
