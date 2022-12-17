@@ -206,37 +206,131 @@ end
 
 # Differential Equations
 
-Routine Name:
+Routine Name: explicit_euler
 
 Language: Julia
 
-Description:
+Description: Solves a first order differential equation, given some initial condition. This is an explicit method, which follows the derivative for some small timestep each iteration.
 
 Input:
 
-*
+* f: The derivative of the function we're solving for
+* x0: Initial value for the function being solved
+* domain: Range of domain values to estimate the solution over
 
-Output:
+Output: Array of function values at each point in the domain
 
 ~~~ { .julia }
-
+function explicit_euler(f, x0, domain)
+    n = length(domain)
+    # Assumes an evenly spaced domain
+    h = domain[2] - domain[1]
+    
+    yhat = Array{Float64}(undef, n)
+    yhat[1] = x0
+    
+    for i in 2:n
+        yn = yhat[i-1]
+        tn = domain[i-1]
+        yhat[i] = yn + h*f(yn)
+    end
+    
+    yhat
+end
 ~~~
 
 
-Routine Name:
+Routine Name: implicit_euler
 
 Language: Julia
 
-Description:
+Description: Solve a first-order differential equation, given some initial condition. This is an implicit method, which requires finding the zero of a function. To do this, the Newton-Raphson method is used.
 
 Input:
 
-*
+* f: The derivative of the function being solved for
+* y0: Initial condition
+* a: Left endpoint of the interval
+* b: Right endpoint of the interval
+* h: Size of each step
 
-Output:
+Output: Array of function values from a to b
 
 ~~~ { .julia }
-
+function implicit_euler(f, y0, a, b, h)
+    #Begin at t1
+    t1 = a + h
+    domain = t1:h:b
+    yk = y0
+    
+    Y = [y0]
+    
+    for t in domain
+        g(y) = yk + h*f(y) - y
+        yk = newton_raphson(g, yk)
+        Y = [Y; yk]
+    end
+    
+    Y
+end
 ~~~
 
-# Linear Algebra
+# Numerical Integration
+
+
+Routine Name: trapezoid
+
+Language: Julia
+
+Description: Estimates the integral of $f$ using the trapezoid rule.
+
+Input:
+
+* f: The function to be integrated
+* a: Left endpoint of the interval
+* b: Right endpoint of the interval
+* n: Number of trapezoids
+
+Output: Proper integral of $f$ from a to b
+
+~~~ { .julia }
+function trapezoid(f, a, b, n)
+    h = (b-a) / n
+    domain = a:h:b
+    
+    @assert domain[end] == b
+    
+    pairs = zip(domain[1:end-1], domain[2:end])
+    sum(h * (f(an) + f(bn)) / 2 for (an, bn) in pairs)
+end
+~~~
+
+Routine Name: simpson
+
+Language: Julia
+
+Description: Uses Simpson's rule to approximate the proper integral of a function. Has a higher order of convergence than the trapezoid rule, since it evaluates the function 3 times per iteration instead of two.
+
+Input:
+
+* f: The function being integrated
+* a: Left endpoint of the interval
+* b: Right endpoint of the interval
+* h: Size of each step
+
+Output: Proper integral of $f$ from a to b
+
+~~~ { .julia }
+function simpson(f, a, b, h)
+    domain = a:h:b
+    
+    if domain[end] != b
+        domain = vcat(domain, b)
+    end
+    
+    @assert domain[end] == b
+    
+    pairs = zip(domain[1:end-1], domain[2:end])
+    sum((bn - an) / 6 * (f(an) + 4f((an + bn) / 2) + f(bn)) for (an, bn) in pairs)
+end
+~~~
